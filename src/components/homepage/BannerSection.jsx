@@ -42,9 +42,9 @@ export default function BannerSection() {
           </p>
 
           {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-4">
+          <div className="flex sm:flex-row gap-4 justify-center lg:justify-start pt-4">
             <Button
-              size="lg"
+              size="sm"
               className="bg-indigo-600 hover:bg-indigo-700 text-white font-bold h-14 px-8 rounded-xl shadow-xl shadow-indigo-600/20 transition-all duration-200"
               endContent={<FiArrowRight className="h-5 w-5" />}
               onClick={() => router.push("/register")}
@@ -53,7 +53,7 @@ export default function BannerSection() {
             </Button>
             
             <Button
-              size="lg"
+              size="sm"
               variant="bordered"
               className="border-2 border-gray-200 dark:border-gray-800 text-gray-700 dark:text-gray-300 font-semibold h-14 px-8 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-900 transition-all duration-200"
               startContent={<FaGithub className="h-5 w-5" />}
