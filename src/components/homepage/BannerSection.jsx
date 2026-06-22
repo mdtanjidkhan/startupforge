@@ -63,7 +63,7 @@ export default function BannerSection() {
             </Button>
           </div>
 
-          {/* Tech Stack Mini Indicator */}
+          {/* Tech Stack Mini Indicator s */}
           <div className="pt-8 border-t border-gray-100 dark:border-gray-800/60 flex flex-wrap justify-center lg:justify-start items-center gap-6 text-gray-400 dark:text-gray-500 text-sm font-semibold">
             <span className="text-gray-500 dark:text-gray-400">Powering:</span>
             <span>React.js</span>
