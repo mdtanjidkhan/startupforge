@@ -79,8 +79,7 @@ export default function BannerSection() {
             
             {/* Overlay Glass Effect Grid */}
             <div className="absolute inset-0 bg-white/10 dark:bg-black/10 backdrop-blur-[2px] pointer-events-none" />
-            
-            {/* Top Row Visual */}
+        
             <div className="flex justify-between items-start relative z-10">
               <div className="p-3 bg-white/20 backdrop-blur-md rounded-2xl border border-white/20 text-white">
                 <BiCodeAlt className="h-6 w-6" />
