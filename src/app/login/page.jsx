@@ -87,7 +87,6 @@ export default function LoginPage() {
           </p>
         </div>
 
-        {/* গুগল ওয়ান-ক্লিক লগইন বাটন */}
         <div className="space-y-3">
           <button
             type="button"
@@ -115,7 +114,6 @@ export default function LoginPage() {
             <span>Continue with Google</span>
           </button>
 
-          {/* ডিভাইডার */}
           <div className="relative flex items-center justify-center py-2">
             <div className="absolute inset-0 flex items-center">
               <div className="w-full border-t border-gray-200 dark:border-gray-800"></div>
@@ -125,11 +123,8 @@ export default function LoginPage() {
             </span>
           </div>
         </div>
-
-        {/* লগইন ফর্ম */}
         <form onSubmit={handleSubmit} className="space-y-4">
           
-          {/* ইমেইল ফিল্ড */}
           <div className="w-full">
             <Input
               required
@@ -147,7 +142,6 @@ export default function LoginPage() {
             />
           </div>
 
-          {/* পাসওয়ার্ড ফিল্ড */}
           <div className="w-full">
             <Input
               required
@@ -174,7 +168,6 @@ export default function LoginPage() {
             />
           </div>
 
-          {/* সাবমিট বাটন */}
           <Button
             isLoading={loading}
             type="submit"
@@ -184,7 +177,6 @@ export default function LoginPage() {
           </Button>
         </form>
 
-        {/* রেজিস্ট্রেশন লিংক */}
         <p className="text-center text-sm text-gray-600 dark:text-gray-400 mt-2">
           Don't have an account?{" "}
           <Link href="/register" className="font-semibold text-indigo-600 dark:text-indigo-400 hover:underline">

@@ -14,11 +14,12 @@ export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
 
-  // Better Auth সেশন ডাটা
+  
+  // Better 
   const { data: session, isPending } = authClient.useSession();
   const user = session?.user;
 
-  // Hydration Error এড়াতে mounted চেক
+  // Hydration Error 
   useEffect(() => {
     setMounted(true);
   }, []);
@@ -31,19 +32,17 @@ export default function Navbar() {
   };
 
   const isActive = (path) => pathname === path;
-
-  // পাবলিক লিংকসমূহ
   const navLinks = [
     { name: "Home", href: "/" },
     { name: "Browse Startups", href: "/startups" },
     { name: "Browse Opportunities", href: "/opportunities" },
   ];
-
+   if (pathname.startsWith("/dashboard")) {
+    return null;
+  }
   return (
     <nav className="sticky top-0 z-50 w-full border-b border-gray-200 bg-white/80 backdrop-blur-lg dark:border-gray-800 dark:bg-gray-950/80 transition-colors duration-300">
       <header className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-        
-        {/* বাম পাশ: হ্যামবার্গার ও লোগো */}
         <div className="flex items-center gap-4">
           <button
             className="md:hidden p-2 text-gray-600 dark:text-gray-300 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-900"
@@ -59,8 +58,6 @@ export default function Navbar() {
             <span>StartupForge</span>
           </Link>
         </div>
-
-        {/* মাঝখান: ডেক্সটপ নেভিগেশন লিংক */}
         <ul className="hidden items-center gap-1 md:flex">
           {navLinks.map((link) => (
             <li key={link.href}>
@@ -77,10 +74,7 @@ export default function Navbar() {
             </li>
           ))}
         </ul>
-
-        {/* ডান পাশ: থিম টগল এবং লগইন/প্রোফাইল স্টেট */}
         <div className="flex items-center gap-3">
-          {/* থিম টগল বাটন */}
           <button
             onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
             className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-900 text-gray-600 dark:text-gray-300 transition-colors"
@@ -88,12 +82,10 @@ export default function Navbar() {
           >
             {theme === "dark" ? <Sun className="h-5 w-5 text-amber-500" /> : <Moon className="h-5 w-5" />}
           </button>
-
-          {/* কন্ডিশনাল অথ রেন্ডারিং */}
           {isPending ? (
             <div className="h-6 w-6 animate-spin rounded-full border-2 border-indigo-600 border-t-transparent"></div>
           ) : user ? (
-            /* লগইন থাকা অবস্থার ইউজার ইন্টারফেস */
+           
             <div className="flex items-center gap-4">
               <Link
                 href="/dashboard"
@@ -102,8 +94,6 @@ export default function Navbar() {
                 <LayoutDashboard className="h-4 w-4" />
                 Dashboard
               </Link>
-              
-              {/* ইউজার প্রোফাইল পিকচার এবং লগআউট বাটন */}
               <div className="flex items-center gap-2 border-l border-gray-200 dark:border-gray-800 pl-3">
                 <img
                   src={user.image || "https://avatar.iran.liara.run/public/boy"}
@@ -120,7 +110,7 @@ export default function Navbar() {
               </div>
             </div>
           ) : (
-            /* লগআউট থাকা অবস্থার ইউজার ইন্টারফেস (ডেক্সটপ) */
+           
             <div className="hidden items-center gap-3 md:flex">
               <Link href="/login" className="text-sm font-medium text-gray-600 hover:text-indigo-600 dark:text-gray-300 dark:hover:text-indigo-400">
                 Login
@@ -135,7 +125,7 @@ export default function Navbar() {
         </div>
       </header>
 
-      {/* মোবাইল ড্রয়ার মেনু */}
+     
       {isMenuOpen && (
         <div className="border-t border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-950 md:hidden">
           <ul className="flex flex-col gap-2 p-4">
@@ -155,7 +145,6 @@ export default function Navbar() {
               </li>
             ))}
 
-            {/* মোবাইল অথ সেকশন */}
             <li className="mt-2 flex flex-col gap-2 border-t border-gray-200 dark:border-gray-800 pt-4">
               {user ? (
                 <>

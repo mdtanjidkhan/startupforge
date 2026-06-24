@@ -95,8 +95,8 @@ export default function RegisterPage() {
         password: formData.password,
         name: formData.name,
         image: imageUrl,
-        role: formData.role, // Root level custom property
-        isBlocked: false     // Root level custom property
+        role: formData.role,
+        isBlocked: false     
       });
     console.log("Better Auth Full Response Data:", data);
       if (error) {
@@ -117,8 +117,7 @@ export default function RegisterPage() {
       <Toaster position="top-center" />
       
       <div className="w-full max-w-md space-y-6 bg-white dark:bg-gray-900 p-6 sm:p-8 rounded-2xl border border-gray-200 dark:border-gray-800 shadow-xl">
-        
-        {/* হেডার */}
+      
         <div className="text-center">
           <div className="flex justify-center">
             <div className="p-2.5 bg-indigo-50 dark:bg-indigo-950/50 text-indigo-600 dark:text-indigo-400 rounded-xl">
@@ -129,8 +128,6 @@ export default function RegisterPage() {
             Create an Account
           </h2>
         </div>
-
-        {/* গুগল বাটন */}
         <div className="space-y-3">
           <button
             type="button"
@@ -156,10 +153,7 @@ export default function RegisterPage() {
           </div>
         </div>
 
-        {/* মেইন ফর্ম */}
         <form onSubmit={handleSubmit} className="space-y-4">
-          
-          {/* নাম */}
           <div className="w-full">
             <Input
               required
@@ -176,8 +170,6 @@ export default function RegisterPage() {
               onChange={handleChange}
             />
           </div>
-
-          {/* ইমেইল */}
           <div className="w-full">
             <Input
               required
@@ -194,8 +186,6 @@ export default function RegisterPage() {
               onChange={handleChange}
             />
           </div>
-
-          {/* রোল সিলেকশন */}
           <div className="space-y-1.5 w-full">
             <label className="text-xs font-semibold text-gray-600 dark:text-gray-400 block pl-1">
               Select Your Role *
@@ -215,8 +205,6 @@ export default function RegisterPage() {
               </option>
             </select>
           </div>
-
-          {/* প্রোফাইল ইমেজ */}
           <div className="space-y-1.5 w-full">
             <label className="text-xs font-semibold text-gray-600 dark:text-gray-400 block pl-1">
               Profile Image *
@@ -237,7 +225,6 @@ export default function RegisterPage() {
             </label>
           </div>
 
-          {/* পাসওয়ার্ড */}
           <div className="w-full">
             <Input
               required
@@ -263,8 +250,6 @@ export default function RegisterPage() {
               type={isVisible ? "text" : "password"}
             />
           </div>
-
-          {/* সাবমিট বাটন */}
           <Button
             isLoading={loading}
             type="submit"
@@ -273,8 +258,6 @@ export default function RegisterPage() {
             Sign Up
           </Button>
         </form>
-
-        {/* লগইন লিংক */}
         <p className="text-center text-sm text-gray-600 dark:text-gray-400 mt-2">
           Already have an account?{" "}
           <Link href="/login" className="font-semibold text-indigo-600 dark:text-indigo-400 hover:underline">
