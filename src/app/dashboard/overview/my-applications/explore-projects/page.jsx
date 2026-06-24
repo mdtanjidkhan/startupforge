@@ -3,7 +3,7 @@ import React from 'react';
 const ExploreProjectPage = () => {
     return (
         <div>
-            explore-projects
+            explore-projects now 
         </div>
     );
 };
