@@ -22,7 +22,7 @@ export default function DashboardHomepage() {
     if (userRole === "founder") {
       router.push("/dashboard/overview");
     } else {
-      router.push("/dashboard/overview"); 
+      router.push("/dashboard/collaborator");
     }
   }, [session, isPending, router]);
 

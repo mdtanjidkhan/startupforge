@@ -15,7 +15,8 @@ import {
   HiOutlineMagnifyingGlass,  
   HiOutlineArrowLeftOnRectangle, 
   HiBars3BottomLeft,          
-  HiOutlineInboxArrowDown
+  HiOutlineInboxArrowDown,
+  HiOutlineUserCircle
 } from "react-icons/hi2";
 
 export default function DashboardSidebar() {
@@ -38,9 +39,9 @@ export default function DashboardSidebar() {
 
  
   const collaboratorItems = [
-    { name: "Overview", href: "/dashboard/overview", icon: HiOutlineSquares2X2 },
-    { name: "My Applications", href: "/dashboard/overview/my-applications", icon: HiOutlineQueueList },
-    { name: "Explore Projects", href: "/dashboard/overview/my-applications/explore-projects", icon: HiOutlineMagnifyingGlass },
+    { name: "Overview", href: "/dashboard/collaborator", icon: HiOutlineSquares2X2 },
+    { name: "My Applications", href: "/dashboard/collaborator/my-applications", icon: HiOutlineQueueList },
+    { name: "My Profile", href: "/dashboard/collaborator/my-applications/my-profile", icon: HiOutlineUserCircle },
     { name: "Track Status", href: "/dashboard/overview/my-applications/explore-projects/track-status", icon: HiOutlineBriefcase },
   ];
 
@@ -90,17 +91,19 @@ export default function DashboardSidebar() {
     <>
       <aside className="hidden w-64 shrink-0 border-r border-default p-4 lg:block bg-white dark:bg-gray-900 h-screen sticky top-0 transition-colors duration-300">
         <div className="h-12 flex items-center px-2 mb-6">
-          <span className="text-xl font-black text-indigo-600 dark:text-indigo-400 tracking-wider">
+         <Link href={'/'}> <span className="text-xl font-black text-indigo-600 dark:text-indigo-400 tracking-wider">
             StartupForge
-          </span>
+          </span></Link>
         </div>
         {navLink}
       </aside>
 
       <div className="lg:hidden fixed top-0 left-0 right-0 h-16 bg-white dark:bg-gray-900 border-b border-default z-40 flex items-center justify-end px-6 shadow-sm">
+       <Link href={'/'}>
         <span className="text-md font-black text-indigo-600 dark:text-indigo-400 tracking-wider">
           StartupForge
         </span>
+       </Link>
       </div>
       <Drawer key={pathname}>
         <Button className="lg:hidden fixed top-3 left-4 z-50 font-bold rounded-xl h-10 bg-gray-100 dark:bg-gray-800 text-foreground" variant="flat">

@@ -45,7 +45,7 @@ export default function LoginPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    const toastId = toast.loading("লগইন হচ্ছে...");
+    const toastId = toast.loading("Login...");
 
     try {
       const { data, error } = await authClient.signIn.email({
@@ -54,13 +54,13 @@ export default function LoginPage() {
       });
 
       if (error) {
-        toast.error(error.message || "ইমেইল অথবা পাসওয়ার্ড ভুল!", { id: toastId });
+        toast.error(error.message || "Email or Password is Incorrect!", { id: toastId });
       } else {
-        toast.success("লগইন সফল হয়েছে!", { id: toastId });
+        toast.success("Login was succeessful!", { id: toastId });
         router.push("/dashboard"); 
       }
     } catch (err) {
-      toast.error("কিছু একটা ভুল হয়েছে! আবার চেষ্টা করুন।", { id: toastId });
+      toast.error("Something went wrong! try again", { id: toastId });
     } finally {
       setLoading(false);
     }
@@ -71,8 +71,6 @@ export default function LoginPage() {
       <Toaster position="top-center" />
       
       <div className="w-full max-w-md space-y-6 bg-white dark:bg-gray-900 p-6 sm:p-8 rounded-2xl border border-gray-200 dark:border-gray-800 shadow-xl">
-        
-        {/* হেডার ও লোগো */}
         <div className="text-center">
           <div className="flex justify-center">
             <div className="p-2.5 bg-indigo-50 dark:bg-indigo-950/50 text-indigo-600 dark:text-indigo-400 rounded-xl">
