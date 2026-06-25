@@ -207,7 +207,7 @@ export default function RegisterPage() {
           </div>
           <div className="space-y-1.5 w-full">
             <label className="text-xs font-semibold text-gray-600 dark:text-gray-400 block pl-1">
-              Profile Image *
+              Profile Image 
             </label>
             <label className="flex flex-col items-center justify-center w-full h-24 border-2 border-dashed border-gray-300 dark:border-gray-700 rounded-xl cursor-pointer bg-gray-50 dark:bg-gray-800/30 hover:bg-gray-100 dark:hover:bg-gray-800 transition-all">
               <div className="flex flex-col items-center justify-center py-2 text-center px-3">
