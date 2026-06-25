@@ -54,7 +54,7 @@ export default function ApplyModal({ isOpen, onClose, opportunity, userEmail, us
       const data = await res.json();
 
       if (data.success) {
-        toast.success("Application submitted successfully! 🚀");
+        toast.success("Application submitted successfully!");
         onClose(); 
       } else {
         toast.error(data.message || "Something went wrong.");
