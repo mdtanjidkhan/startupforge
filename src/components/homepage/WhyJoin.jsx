@@ -33,7 +33,6 @@ export default function WhyJoin() {
 
   return (
     <section className="py-16 max-w-7xl mx-auto px-4 border-t border-gray-100 dark:border-slate-800/40">
-      {/* 🎯 সেকশন হেডার */}
       <div className="text-center max-w-2xl mx-auto space-y-3 mb-12">
         <h2 className="text-3xl font-black text-gray-900 dark:text-white tracking-tight">
           ⚡ Why Join StartupForge?
@@ -43,19 +42,16 @@ export default function WhyJoin() {
         </p>
       </div>
 
-      {/* 📱 রেসপন্সিভ গ্রিড (ফোনে ১টি, ট্যাবে ২টি, ল্যাপটপে ৩টি কার্ড দেখাবে) */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {features.map((item) => (
           <Card
             key={item.id}
             className={`p-6 bg-white dark:bg-[#111827] border border-gray-100 dark:border-slate-800 rounded-3xl shadow-sm transition-all duration-300 ${item.borderColor} space-y-4 group`}
           >
-            {/* আইকন বক্স */}
+       
             <div className={`p-3.5 ${item.bgIcon} rounded-2xl w-fit group-hover:scale-110 transition-transform duration-300`}>
               {item.icon}
             </div>
-
-            {/* টেক্সট কন্টেন্ট */}
             <div className="space-y-1.5">
               <h3 className="text-lg font-bold text-gray-900 dark:text-white">
                 {item.title}
