@@ -1,11 +1,11 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Link from "next/link"; 
+import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useTheme } from "next-themes";
-import { authClient } from "@/lib/auth-client"; 
-import { Button } from "@heroui/react"; 
+import { authClient } from "@/lib/auth-client";
+import { Avatar, Button } from "@heroui/react";
 import { Rocket, Sun, Moon, LayoutDashboard, LogOut, Menu, X } from "lucide-react";
 
 export default function Navbar() {
@@ -14,7 +14,7 @@ export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
 
-  
+
   // Better 
   const { data: session, isPending } = authClient.useSession();
   const user = session?.user;
@@ -37,7 +37,7 @@ export default function Navbar() {
     { name: "Browse Startups", href: "/startups" },
     { name: "Browse Opportunities", href: "/opportunities" },
   ];
-   if (pathname.startsWith("/dashboard")) {
+  if (pathname.startsWith("/dashboard")) {
     return null;
   }
   return (
@@ -52,7 +52,7 @@ export default function Navbar() {
           >
             {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
           </button>
-          
+
           <Link href="/" className="flex items-center gap-2 font-bold text-xl tracking-tight text-indigo-600 dark:text-indigo-400">
             <Rocket className="h-6 w-6 animate-pulse" />
             <span>StartupForge</span>
@@ -63,11 +63,10 @@ export default function Navbar() {
             <li key={link.href}>
               <Link
                 href={link.href}
-                className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
-                  isActive(link.href)
+                className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${isActive(link.href)
                     ? "text-indigo-600 dark:text-indigo-400 font-semibold"
                     : "text-gray-600 hover:text-indigo-600 dark:text-gray-300 dark:hover:text-indigo-400"
-                }`}
+                  }`}
               >
                 {link.name}
               </Link>
@@ -85,7 +84,7 @@ export default function Navbar() {
           {isPending ? (
             <div className="h-6 w-6 animate-spin rounded-full border-2 border-indigo-600 border-t-transparent"></div>
           ) : user ? (
-           
+
             <div className="flex items-center gap-4">
               <Link
                 href="/dashboard"
@@ -95,11 +94,11 @@ export default function Navbar() {
                 Dashboard
               </Link>
               <div className="flex items-center gap-2 border-l border-gray-200 dark:border-gray-800 pl-3">
-                <img
-                  src={user.image || "https://avatar.iran.liara.run/public/boy"}
-                  alt={user.name}
-                  className="h-8 w-8 rounded-full object-cover border border-indigo-500"
-                />
+
+                <Avatar className="h-10 w-10 rounded-full object-cover border border-indigo-500">
+                  <Avatar.Image alt={user.name} src={user.image} />
+                  <Avatar.Fallback>JD</Avatar.Fallback>
+                </Avatar>
                 <button
                   onClick={handleLogout}
                   className="hidden sm:block p-1.5 text-gray-500 hover:text-red-500 dark:text-gray-400 dark:hover:text-red-400 transition-colors"
@@ -110,7 +109,7 @@ export default function Navbar() {
               </div>
             </div>
           ) : (
-           
+
             <div className="hidden items-center gap-3 md:flex">
               <Link href="/login" className="text-sm font-medium text-gray-600 hover:text-indigo-600 dark:text-gray-300 dark:hover:text-indigo-400">
                 Login
@@ -125,7 +124,7 @@ export default function Navbar() {
         </div>
       </header>
 
-     
+
       {isMenuOpen && (
         <div className="border-t border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-950 md:hidden">
           <ul className="flex flex-col gap-2 p-4">
@@ -134,11 +133,10 @@ export default function Navbar() {
                 <Link
                   href={link.href}
                   onClick={() => setIsMenuOpen(false)}
-                  className={`block py-2 px-3 rounded-lg text-base font-medium ${
-                    isActive(link.href)
+                  className={`block py-2 px-3 rounded-lg text-base font-medium ${isActive(link.href)
                       ? "bg-indigo-50 text-indigo-600 dark:bg-indigo-950/50 dark:text-indigo-400"
                       : "text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-900"
-                  }`}
+                    }`}
                 >
                   {link.name}
                 </Link>

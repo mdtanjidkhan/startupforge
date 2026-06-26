@@ -103,7 +103,7 @@ export default function RegisterPage() {
         toast.error(error.message || "Registration failed.", { id: toastId });
       } else {
         toast.success("Registration successful!", { id: toastId });
-        // router.push("/dashboard"); 
+        router.push("/dashboard"); 
       }
     } catch (err) {
       toast.error(err.message || "Something went wrong!", { id: toastId });

@@ -3,14 +3,13 @@
 import { useEffect, useState } from "react";
 import { Card, Avatar, Chip, Button } from "@heroui/react";
 import toast from "react-hot-toast";
-import { 
-  HiOutlineUsers, 
-  HiOutlineShieldCheck, 
+import {
+  HiOutlineUsers,
+  HiOutlineShieldCheck,
   HiOutlineShieldExclamation,
   HiOutlineMagnifyingGlass,
   HiOutlineArrowPath
 } from "react-icons/hi2";
-import { getSession } from "better-auth/api";
 import { authClient } from "@/lib/auth-client";
 
 export default function ManageUsers() {
@@ -44,7 +43,7 @@ export default function ManageUsers() {
   const handleToggleBlock = async (email, isBlocked) => {
     setActionLoading(email);
     const endpoint = isBlocked ? "unblock" : "block";
-    
+
     try {
       const res = await fetch(`http://localhost:5000/api/admin/users/${endpoint}`, {
         method: "PATCH",
@@ -54,9 +53,9 @@ export default function ManageUsers() {
       const data = await res.json();
 
       if (data.success) {
-        toast.success(isBlocked ? "User Unblocked! ✅" : "User Blocked! 🚫");
-        setUsers(prevUsers => 
-          prevUsers.map(user => 
+        toast.success(isBlocked ? "User Unblocked! " : "User Blocked! ");
+        setUsers(prevUsers =>
+          prevUsers.map(user =>
             user.email === email ? { ...user, isBlocked: !isBlocked } : user
           )
         );
@@ -70,19 +69,20 @@ export default function ManageUsers() {
       setActionLoading(null);
     }
   };
-const { data: session } = authClient.useSession();
-const filteredUsers = users.filter(user => {
-  if (user.email === session?.user?.email) return false;
-  return (
-    user.name?.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    user.email?.toLowerCase().includes(searchQuery.toLowerCase())
-  );
-});
-
+  const { data:session } = authClient.useSession();
+  console.log('sestion', session);
+  const filteredUsers = users.filter(user => {
+    if (user.email === session?.user?.email) return false;
+    return (
+      user.name?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      user.email?.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+  });
+  
 
   return (
     <div className="w-full px-2 sm:px-4 md:p-8 space-y-6 mt-20 md:mt-0 max-w-full">
-      
+
       <div className="w-full flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between border-b border-gray-100 dark:border-slate-800 pb-5 px-1">
         <div>
           <h1 className="text-2xl md:text-3xl font-black tracking-tight text-gray-900 dark:text-white flex items-center gap-2">
@@ -123,7 +123,10 @@ const filteredUsers = users.filter(user => {
           filteredUsers.map((user) => (
             <Card key={user.id} className="bg-white dark:bg-[#111827] border border-gray-100 dark:border-slate-800 rounded-2xl p-4 space-y-4 shadow-sm w-full">
               <div className="flex items-center gap-3">
-                <Avatar src={session?.user?.image} name={user.name} radius="xl" className="size-11 shrink-0" />
+                <Avatar radius="xl" className="">
+                  <Avatar.Image alt={user.name} src={user?.image
+} />
+                </Avatar>
                 <div className="truncate min-w-0">
                   <h3 className="text-sm font-bold text-gray-900 dark:text-white truncate">{user.name}</h3>
                   <p className="text-xs text-gray-500 dark:text-slate-400 truncate">{user.email}</p>
@@ -134,9 +137,9 @@ const filteredUsers = users.filter(user => {
                   <Chip size="sm" variant="flat" className="capitalize font-semibold bg-gray-100 text-gray-700 dark:bg-slate-800 dark:text-slate-300">
                     {user.role}
                   </Chip>
-                  <Chip 
-                    size="sm" 
-                    variant="flat" 
+                  <Chip
+                    size="sm"
+                    variant="flat"
                     color={user.isBlocked ? "danger" : "success"}
                     className="font-bold"
                   >
@@ -193,9 +196,9 @@ const filteredUsers = users.filter(user => {
                     </Chip>
                   </td>
                   <td className="py-4 px-6">
-                    <Chip 
-                      size="sm" 
-                      variant="dot" 
+                    <Chip
+                      size="sm"
+                      variant="dot"
                       color={user.isBlocked ? "danger" : "success"}
                       className="font-bold border-none bg-transparent"
                     >

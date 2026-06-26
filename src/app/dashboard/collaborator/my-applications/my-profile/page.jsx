@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { authClient } from "@/lib/auth-client";
-import { Card, Spinner, Button, Input, Textarea, Avatar, Chip, TextArea } from "@heroui/react";
+import { Card, Spinner, Button, Input,  Avatar, Chip, TextArea } from "@heroui/react";
 import toast from "react-hot-toast";
 import { 
   HiOutlineUser, 
@@ -142,12 +142,10 @@ export default function CollaboratorProfile() {
         
        
         <Card className="p-6 bg-white dark:bg-[#111827] border border-gray-100 dark:border-slate-800/80 rounded-2xl shadow-sm flex flex-col items-center text-center sticky top-28 gap-4">
-          <Avatar 
-            src={formData.image || "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde"} 
-            className="w-24 h-24 text-large font-black border-4 border-violet-100 dark:border-violet-950/50"
-            name={formData.name || "User"}
-          />
-          
+           <Avatar className="w-24 h-24 text-large font-black border-4 border-violet-100 dark:border-violet-950/50">
+        <Avatar.Image alt={formData.name} src={formData.image} />
+        <Avatar.Fallback>j</Avatar.Fallback>
+      </Avatar>
           <div className="space-y-1">
             <h3 className="font-bold text-gray-900 dark:text-slate-100 text-xl tracking-tight">
               {formData.name || "Your Name"}

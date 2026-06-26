@@ -1,10 +1,18 @@
-import { getSession } from "better-auth/api"
+import { auth } from "@/lib/auth"; 
+import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 
+export const requireRole = async (allowedRole) => {
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  });
 
-export const requireRole = async (role)=>{
-    const user = await getSession();
-    if(user.role !== role){
-     return  redirect("/unauthorization")
-    }
-}
+
+  if (!session || !session.user) {
+    return redirect("/login");
+  }
+
+  if (session.user.role !== allowedRole) {
+    return redirect("/unauthorized");
+  }
+};

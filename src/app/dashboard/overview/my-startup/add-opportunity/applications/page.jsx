@@ -86,9 +86,7 @@ export default function FounderApplications() {
   }
 
   return (
-    <div className="max-w-5xl mx-auto space-y-8 px-4 py-8 mt-16 md:mt-24 transition-colors duration-300">
-      
-   
+    <div className="max-w-5xl mx-auto space-y-8 px-4 py-8 mt-16 md:mt-0 transition-colors duration-300">
       <div className="space-y-1 text-center sm:text-left">
         <h1 className="text-2xl md:text-3xl font-black tracking-tight text-gray-900 dark:text-slate-100">
           Applications
