@@ -25,7 +25,7 @@ export default function FeaturedStartups() {
     fetchStartups();
   }, []);
 
-  // লোডিং স্টেট
+  
   if (loading) {
     return (
       <div className="py-12 max-w-7xl mx-auto px-4 text-center text-sm text-gray-400 font-semibold animate-pulse">
