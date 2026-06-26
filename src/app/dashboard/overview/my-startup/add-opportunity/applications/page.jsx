@@ -49,7 +49,7 @@ export default function FounderApplications() {
     setActionLoading((prev) => ({ ...prev, [id]: targetStatus }));
 
     try {
-      const res = await fetch(`http://localhost:5000/api/applications/${id}/status`, {
+      const res = await fetch(`http://localhost:5000/api/applications/status/${id}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ status: targetStatus })

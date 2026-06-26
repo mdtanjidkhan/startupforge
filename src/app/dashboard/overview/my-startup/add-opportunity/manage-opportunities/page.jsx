@@ -53,10 +53,6 @@ export default function ManageOpportunities() {
 
   const handleDelete = async (e, id) => {
     e.stopPropagation(); 
-    
-    const confirmDelete = window.confirm("Are you sure you want to delete this opportunity?");
-    if (!confirmDelete) return;
-
     try {
       const res = await fetch(`http://localhost:5000/api/opportunities/${id}`, {
         method: "DELETE",

@@ -16,7 +16,13 @@ import {
   HiOutlineArrowLeftOnRectangle, 
   HiBars3BottomLeft,          
   HiOutlineInboxArrowDown,
-  HiOutlineUserCircle
+  HiOutlineUserCircle,
+  // 
+  HiOutlineChartBar,         // Analytics এর জন্য
+  HiOutlineUsers,            // Users এর জন্য
+  HiOutlineShieldCheck,      // Moderation এর জন্য
+  HiOutlineCreditCard
+
 } from "react-icons/hi2";
 
 export default function DashboardSidebar() {
@@ -45,7 +51,20 @@ export default function DashboardSidebar() {
     { name: "Track Status", href: "/dashboard/overview/my-applications/explore-projects/track-status", icon: HiOutlineBriefcase },
   ];
 
-  const currentMenu = userRole === "founder" ? founderItems : collaboratorItems;
+  const adminItems = [
+    { name: "Analytics", href: "/dashboard/admin/analytics", icon: HiOutlineChartBar },
+    { name: "Manage Users", href: "/dashboard/admin/users", icon: HiOutlineUsers },
+    { name: "Moderation", href: "/dashboard/admin/moderation", icon: HiOutlineShieldCheck },
+    { name: "Payments", href: "/dashboard/admin/payments", icon: HiOutlineCreditCard },
+  ];
+
+  let currentMenu = collaboratorItems;
+  if (userRole === "admin") {
+    currentMenu = adminItems;
+  } else if (userRole === "founder") {
+    currentMenu = founderItems;
+  }
+
 
   const handleLogout = async () => {
     await authClient.signOut();

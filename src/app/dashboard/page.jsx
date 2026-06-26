@@ -19,7 +19,9 @@ export default function DashboardHomepage() {
 
     const userRole = session?.user?.role;
 
-    if (userRole === "founder") {
+   if (userRole === "admin") {
+      router.push("/dashboard/admin/analytics");
+    } else if (userRole === "founder") {
       router.push("/dashboard/overview");
     } else {
       router.push("/dashboard/collaborator");
