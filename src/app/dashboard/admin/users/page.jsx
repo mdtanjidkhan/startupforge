@@ -90,7 +90,7 @@ const filteredUsers = users.filter(user => {
             Manage Users
           </h1>
           <p className="text-sm text-gray-500 dark:text-slate-400 mt-1">
-            View platform members, manage control access, and toggle block status..
+            View platform members, manage control access, and toggle block status.
           </p>
         </div>
         <div className="flex items-center gap-2 w-full sm:w-auto">
