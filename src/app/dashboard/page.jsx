@@ -33,7 +33,7 @@ export default function DashboardHomepage() {
     <div className="h-[70vh] w-full flex flex-col justify-center items-center gap-3">
       <div className="w-8 h-8 border-3 border-indigo-600 border-t-transparent rounded-full animate-spin" />
       <p className="text-sm font-medium text-gray-500 animate-pulse">
-        Loading your workspace...
+        Loading your workspace..
       </p>
     </div>
   );
