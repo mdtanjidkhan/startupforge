@@ -24,7 +24,7 @@ export default function MyApplications() {
       if (!session?.user?.email) return;
       
       try {
-        const res = await fetch(`http://localhost:5000/api/my-applications?email=${session.user.email}`);
+        const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_SITE_URL}/api/my-applications?email=${session.user.email}`);
         const data = await res.json();
         
         if (res.ok) {

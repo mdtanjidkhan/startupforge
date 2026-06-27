@@ -44,7 +44,7 @@ export default function MyStartupPage() {
   const fetchStartupProfile = async (email) => {
     if (!email) return;
     try {
-      const res = await fetch(`http://localhost:5000/api/my-startup?email=${email}`);
+      const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_SITE_URL}/api/my-startup?email=${email}`);
       const data = await res.json();
       
       if (data.success && data.data) {
@@ -124,15 +124,18 @@ export default function MyStartupPage() {
 
     const isNew = !startupData._id;
     const url = isNew 
-      ? "http://localhost:5000/api/my-startup" 
-      : `http://localhost:5000/api/my-startup/${startupData._id}`;
+      ? `${process.env.NEXT_PUBLIC_SERVER_SITE_URL}/api/my-startup` 
+      : `${process.env.NEXT_PUBLIC_SERVER_SITE_URL}/api/my-startup/${startupData._id}`;
     
     const method = isNew ? "POST" : "PATCH";
-
+     
     try {
+        const { data: tokenData } = await authClient.token();
       const res = await fetch(url, {
         method: method,
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json",
+          authorization: `Bearer ${tokenData?.token}`
+         },
         body: JSON.stringify(startupData),
       });
       const data = await res.json();
@@ -157,9 +160,12 @@ export default function MyStartupPage() {
 
   const handleDeleteStartup = async () => {
     try {
-      const res = await fetch(`http://localhost:5000/api/my-startup/${startupData._id}`, {
+       const { data: tokenData } = await authClient.token();
+      const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_SITE_URL}/api/my-startup/${startupData._id}`, {
         method: "DELETE",
-         headers: { "Content-Type": "application/json" },
+         headers: { "Content-Type": "application/json",
+          authorization: `Bearer ${tokenData?.token}`
+          },
       });
       const data = await res.json();
 
@@ -201,8 +207,6 @@ export default function MyStartupPage() {
 
   return (
     <div className="max-w-4xl mx-auto space-y-6 px-4 py-6 my-4 md:py-10 md:my-6 animate-fade-in w-full box-border">
-      
-      
       <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-gray-100 dark:border-slate-800/60 pb-5 gap-4 w-full">
         <div className="space-y-1 w-full sm:max-w-xl">
           <h1 className="text-xl md:text-2xl font-black tracking-tight text-gray-900 dark:text-slate-100 flex items-center gap-2">

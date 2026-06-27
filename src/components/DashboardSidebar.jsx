@@ -18,12 +18,13 @@ import {
   HiOutlineInboxArrowDown,
   HiOutlineUserCircle,
   // 
-  HiOutlineChartBar,         // Analytics এর জন্য
-  HiOutlineUsers,            // Users এর জন্য
-  HiOutlineShieldCheck,      // Moderation এর জন্য
+  HiOutlineChartBar,         
+  HiOutlineUsers,            
+  HiOutlineShieldCheck,      
   HiOutlineCreditCard
 
 } from "react-icons/hi2";
+import { FaAngleDoubleLeft, FaArrowLeft } from "react-icons/fa";
 
 export default function DashboardSidebar() {
   const pathname = usePathname();
@@ -109,10 +110,11 @@ export default function DashboardSidebar() {
   return (
     <>
       <aside className="hidden w-64 shrink-0 border-r border-default p-4 lg:block bg-white dark:bg-gray-900 h-screen sticky top-0 transition-colors duration-300">
-        <div className="h-12 flex items-center px-2 mb-6">
+        <div className="h-12 flex items-center px-2 mb-6 justify-center gap-10">
          <Link href={'/'}> <span className="text-xl font-black text-indigo-600 dark:text-indigo-400 tracking-wider">
             StartupForge
           </span></Link>
+           <Link href={'/'}><p className=""><FaAngleDoubleLeft className="text-xl text-indigo-600 dark:text-indigo-400 tracking-wider" /></p></Link>
         </div>
         {navLink}
       </aside>
@@ -125,7 +127,7 @@ export default function DashboardSidebar() {
        </Link>
       </div>
       <Drawer key={pathname}>
-        <Button className="lg:hidden fixed top-3 left-4 z-50 font-bold rounded-xl h-10 bg-gray-100 dark:bg-gray-800 text-foreground" variant="flat">
+        <Button className="lg:hidden fixed top-3 left-4 z-50 font-bold rounded-none h-10 bg-gray-100 dark:bg-gray-800 text-foreground" variant="flat">
           <HiBars3BottomLeft className="size-5" />
           Menu
         </Button>

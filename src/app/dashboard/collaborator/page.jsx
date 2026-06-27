@@ -1,5 +1,5 @@
-"use client";
 
+"use client";
 import { useEffect, useState } from "react";
 import { authClient } from "@/lib/auth-client";
 import { Card, Spinner, Button } from "@heroui/react";
@@ -26,7 +26,7 @@ export default function CollaboratorOverview() {
   const fetchStats = async (email) => {
     if (!email) return;
     try {
-      const res = await fetch(`http://localhost:5000/api/collaborator-stats?email=${email}`);
+      const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_SITE_URL}/api/collaborator-stats?email=${email}`);
       const data = await res.json();
       
       if (data.success) {
@@ -38,6 +38,7 @@ export default function CollaboratorOverview() {
       }
     } catch (error) {
       console.error("Error fetching collaborator stats:", error);
+      toast.error("Failed to load real-time statistics.");
       setStats({
         totalApplications: 0,
         pendingApplications: 0,
@@ -101,7 +102,7 @@ export default function CollaboratorOverview() {
           </div>
         </Card>
 
-        {/* ৩. Rejected Applications  */}
+        {/* ৩. Rejected Applications */}
         <Card className="p-4 flex flex-row items-center gap-4 bg-white dark:bg-[#111827] border border-gray-100 dark:border-slate-800 rounded-xl shadow-sm">
           <div className="p-3 bg-rose-50 dark:bg-rose-950/40 text-rose-600 dark:text-rose-400 rounded-xl">
             <HiOutlineXCircle className="size-6" />
@@ -114,7 +115,6 @@ export default function CollaboratorOverview() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        
         <Card className="p-6 border border-gray-200/70 dark:border-slate-800 bg-white dark:bg-[#111827] rounded-2xl shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] hover:border-indigo-500/40 transition-all duration-300 flex flex-col justify-between group">
           <div className="space-y-4">
             <div className="size-12 rounded-xl bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 flex items-center justify-center group-hover:scale-110 transition-transform duration-200">

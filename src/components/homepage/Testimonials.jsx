@@ -1,6 +1,7 @@
 "use client";
 
 import { Avatar } from "@heroui/react";
+import Image from "next/image";
 import { HiUtnsStar } from "react-icons/hi2"; 
 export default function Testimonials() {
   const reviews = [
@@ -71,7 +72,9 @@ export default function Testimonials() {
                 borderTop: "1px solid rgba(156, 163, 175, 0.1)"
               }}
             >
-              <Avatar src={review.avatar} className="w-10 h-10 rounded-xl" />
+              <img src={review.avatar} alt={review.name} height={50} width={50}
+               className="w-10 h-10 rounded-xl" />
+              {/* <Avatar src={review.avatar} className="w-10 h-10 rounded-xl" /> */}
               <div>
                 <h4 className="text-sm font-bold text-gray-900 dark:text-white">
                   {review.name}

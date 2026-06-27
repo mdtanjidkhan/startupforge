@@ -13,7 +13,7 @@ export default function BrowseStartupsPage() {
   useEffect(() => {
     const getAllStartups = async () => {
       try {
-        const res = await fetch("http://localhost:5000/api/startups");
+        const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_SITE_URL}/api/startups`);
         const data = await res.json();
         if (data.success) {
           setStartups(data.startups);

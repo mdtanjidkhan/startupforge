@@ -30,7 +30,7 @@ export default function AdminAnalytics() {
   const fetchAnalyticsData = async () => {
     setLoading(true);
     try {
-      const res = await fetch("http://localhost:5000/api/admin/analytics");
+      const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_SITE_URL}/api/admin/analytics`);
       const data = await res.json();
       if (data.success) {
         setStats({
@@ -138,15 +138,12 @@ export default function AdminAnalytics() {
         ))}
       </div>
 
-      {/* ⭕ ৩. ডাইনামিক সার্কেল (Donut) চার্ট সেকশন - শতভাগ মোবাইল উইডথ ফিক্সড */}
       <div className="w-full">
         <Card className="bg-white dark:bg-[#111827] border border-gray-100 dark:border-slate-800 rounded-2xl p-4 md:p-6 shadow-sm w-full">
           <div className="mb-4 px-1">
             <h4 className="text-base font-bold text-gray-900 dark:text-slate-200">Platform Distribution</h4>
             <p className="text-xs text-gray-400 dark:text-slate-500">Visual ratio of users, startups, opportunities, and total earnings.</p>
           </div>
-
-          {/* 📱 চার্ট কন্টেইনার যেন কোনোভাবেই চেপে না যায় */}
           <div className="w-full h-[300px] sm:h-[340px] md:h-[380px] flex items-center justify-center mx-auto relative">
             {loading ? (
               <span className="text-sm text-gray-400">Loading chart...</span>
@@ -174,7 +171,7 @@ export default function AdminAnalytics() {
                     data={chartData}
                     cx="50%"
                     cy="45%"
-                    innerRadius="50%" // 🍩 ছোট স্ক্রিনের জন্য পারফেক্ট ব্যালেন্স শেপ
+                    innerRadius="50%" 
                     outerRadius="75%" 
                     paddingAngle={3}
                     dataKey="value"

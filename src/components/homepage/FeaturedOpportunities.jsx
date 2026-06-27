@@ -11,7 +11,7 @@ export default function FeaturedOpportunities() {
   useEffect(() => {
     const fetchOpportunities = async () => {
       try {
-        const res = await fetch("http://localhost:5000/api/home/featured-opportunities");
+        const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_SITE_URL}/api/home/featured-opportunities`);
         const data = await res.json();
         if (data.success) {
           setOpportunities(data.opportunities);
@@ -25,7 +25,6 @@ export default function FeaturedOpportunities() {
     fetchOpportunities();
   }, []);
 
-  // লোডিং স্টেট
   if (loading) {
     return (
       <div className="py-12 max-w-7xl mx-auto px-4 text-center text-sm text-gray-400 font-semibold animate-pulse">

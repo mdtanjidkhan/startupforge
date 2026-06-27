@@ -4,7 +4,7 @@
 
 import { useState, useEffect, Suspense } from "react";
 import { authClient } from "@/lib/auth-client"; 
-import { Button, Input, Card } from "@heroui/react";
+import { Button, Input, Card } from "@heroui/react"; 
 import { useSearchParams, useRouter } from "next/navigation";
 import toast from "react-hot-toast"; 
 import { 
@@ -12,8 +12,7 @@ import {
   HiOutlineBriefcase, 
   HiOutlineCodeBracket, 
   HiOutlineCalendarDays,
-  HiOutlineSparkles,
-  HiOutlineCheckCircle
+  HiOutlineSparkles
 } from "react-icons/hi2";
 
 function AddOpportunityForm() {
@@ -35,19 +34,24 @@ function AddOpportunityForm() {
 
   const paymentSuccess = searchParams.get("payment_success");
   const paymentCancel = searchParams.get("payment_cancel");
-
   useEffect(() => {
     const checkUserLimits = async () => {
       if (!session?.user?.email) return;
       try {
-        const res = await fetch(`http://localhost:5000/api/my-opportunities?email=${session?.user?.email}`);
+        const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_SITE_URL}/api/my-opportunities?email=${session?.user?.email}`);
         const existingOpps = await res.json();
         setPostCount(existingOpps.length);
-        const paymentRes = await fetch(`http://localhost:5000/api/admin/analytics`); 
-        const userPaymentRes = await fetch(`http://localhost:5000/api/payments/success?email=${session?.user?.email}`);
+        const userPaymentRes = await fetch(`${process.env.NEXT_PUBLIC_SERVER_SITE_URL}/api/payments/check-premium?email=${session?.user?.email}`);
+        const paymentData = await userPaymentRes.json();
+        
+        if (paymentData && paymentData.isPremium) {
+          setIsPremium(true);
+        } else {
+          setIsPremium(false);
+        }
         
       } catch (error) {
-        console.error("Error fetching user post limit:", error);
+        console.error("Error fetching user post limit or premium status:", error);
       }
     };
 
@@ -57,7 +61,7 @@ function AddOpportunityForm() {
     if (paymentSuccess && session?.user?.email) {
       toast.loading("Processing your premium membership...", { id: "payment" });
       
-      fetch("http://localhost:5000/api/payments/success", {
+      fetch(`${process.env.NEXT_PUBLIC_SERVER_SITE_URL}/api/payments/success`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -115,10 +119,12 @@ function AddOpportunityForm() {
     };
 
     try {
-      const res = await fetch("http://localhost:5000/api/opportunities", {
+      const { data: tokenData } = await authClient.token();
+      const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_SITE_URL}/api/opportunities`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          authorization: `Bearer ${tokenData?.token}`,
         },
         body: JSON.stringify(opportunityPayload),
       });
@@ -151,10 +157,12 @@ function AddOpportunityForm() {
   const handlePremiumUpgrade = async () => {
     try {
       toast.loading("Redirecting to Stripe Checkout...", { id: "stripe" });
-      
-      const res = await fetch("http://localhost:5000/api/create-checkout-session", {
+       const { data: tokenData } = await authClient.token();
+      const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_SITE_URL}/api/create-checkout-session`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json",
+          authorization: `Bearer ${tokenData?.token}`
+         },
         body: JSON.stringify({ email: session?.user?.email })
       });
       
@@ -234,8 +242,6 @@ function AddOpportunityForm() {
               onChange={(e) => setFormData({ ...formData, roleTitle: e.target.value })}
             />
           </div>
-
-          {/* ২. Required Skills */}
           <div className="flex flex-col gap-2">
             <label className="text-sm font-semibold text-gray-700 dark:text-slate-300">Required Skills</label>
             <Input

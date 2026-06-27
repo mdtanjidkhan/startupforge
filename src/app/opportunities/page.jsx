@@ -18,8 +18,9 @@ export default function BrowseOpportunities() {
   const { data: session } = authClient.useSession();
   const [opportunities, setOpportunities] = useState([]);
   const [loading, setLoading] = useState(true);
-  
+
   const [searchQuery, setSearchQuery] = useState("");
+  const [debouncedSearch, setDebouncedSearch] = useState("");
   const [workTypeFilter, setWorkTypeFilter] = useState("all");
   const [commitmentFilter, setCommitmentFilter] = useState("all");
 
@@ -28,15 +29,23 @@ export default function BrowseOpportunities() {
 
   const userRole = session?.user?.role; 
 
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setDebouncedSearch(searchQuery);
+    }, 500);
+
+    return () => clearTimeout(timer);
+  }, [searchQuery]);
+
   const fetchOpportunities = useCallback(async () => {
     setLoading(true);
     try {
       const params = new URLSearchParams();
-      if (searchQuery) params.append("search", searchQuery);
+      if (debouncedSearch) params.append("search", debouncedSearch);
       if (workTypeFilter !== "all") params.append("work_type", workTypeFilter);
       if (commitmentFilter !== "all") params.append("commitment_level", commitmentFilter);
 
-      const res = await fetch(`http://localhost:5000/api/opportunities?${params.toString()}`);
+      const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_SITE_URL}/api/opportunities?${params.toString()}`);
       const data = await res.json();
       
       if (res.ok) {
@@ -50,7 +59,7 @@ export default function BrowseOpportunities() {
     } finally {
       setLoading(false);
     }
-  }, [searchQuery, workTypeFilter, commitmentFilter]);
+  }, [debouncedSearch, workTypeFilter, commitmentFilter]);
 
   useEffect(() => {
     fetchOpportunities();
@@ -85,11 +94,10 @@ export default function BrowseOpportunities() {
 
       <Card className="p-4 bg-white dark:bg-[#111827] border border-gray-200 dark:border-slate-800 rounded-2xl shadow-sm grid grid-cols-1 sm:grid-cols-3 gap-4 items-center">
         <Input
-          isClearable
           placeholder="Search roles (e.g., Frontend)"
           startContent={<HiOutlineMagnifyingGlass className="text-gray-400 size-5" />}
           value={searchQuery}
-          onValueChange={setSearchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)} 
           className="w-full"
           variant="bordered"
         />
@@ -167,7 +175,6 @@ export default function BrowseOpportunities() {
                       </span>
                     ))}
                   </div>
-
                   <div className="grid grid-cols-2 gap-2 text-xs text-gray-500 dark:text-slate-400 pt-2 border-t border-gray-100 dark:border-slate-800/50">
                     <span className="flex items-center gap-1.5">
                       <HiOutlineMapPin className="size-4 text-indigo-500 shrink-0" /> 

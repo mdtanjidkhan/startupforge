@@ -46,9 +46,12 @@ export default function ApplyModal({ isOpen, onClose, opportunity, userEmail, us
     };
 
     try {
-      const res = await fetch("http://localhost:5000/api/applications", {
+       const { data: tokenData } = await authClient.token();
+      const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_SITE_URL}/api/applications`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json",
+          authorization: `Bearer ${tokenData?.token}`
+         },
         body: JSON.stringify(applicationData)
       });
       const data = await res.json();

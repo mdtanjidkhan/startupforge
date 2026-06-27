@@ -10,6 +10,7 @@ import {
   HiOutlineMagnifyingGlass,
   HiOutlineArrowPath
 } from "react-icons/hi2";
+import { authClient } from "@/lib/auth-client";
 
 export default function ManageStartups() {
   const [startups, setStartups] = useState([]);
@@ -20,7 +21,7 @@ export default function ManageStartups() {
   const fetchStartups = async () => {
     setLoading(true);
     try {
-      const res = await fetch("http://localhost:5000/api/admin/startups");
+      const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_SITE_URL}/api/admin/startups`);
       const data = await res.json();
       if (data.success) {
         setStartups(data.startups);
@@ -41,7 +42,7 @@ export default function ManageStartups() {
   const handleApprove = async (id) => {
     setActionLoading(id);
     try {
-      const res = await fetch("http://localhost:5000/api/admin/startups/approve", {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_SITE_URL}/api/admin/startups/approve`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ id })
@@ -67,9 +68,13 @@ export default function ManageStartups() {
   const handleReject = async (id) => {
     setActionLoading(id);
     try {
-      const res = await fetch("http://localhost:5000/api/admin/startups/reject", {
+       const {data:tokenData} = await authClient.token()
+       console.log(tokenData)
+      const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_SITE_URL}/api/admin/startups/reject`, {
         method: "PATCH",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json",
+
+         },
         body: JSON.stringify({ id })
       });
       const data = await res.json();

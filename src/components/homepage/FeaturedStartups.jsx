@@ -11,7 +11,7 @@ export default function FeaturedStartups() {
   useEffect(() => {
     const fetchStartups = async () => {
       try {
-        const res = await fetch("http://localhost:5000/api/home/featured-startups");
+        const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_SITE_URL}/api/home/featured-startups`);
         const data = await res.json();
         if (data.success) {
           setStartups(data.startups);

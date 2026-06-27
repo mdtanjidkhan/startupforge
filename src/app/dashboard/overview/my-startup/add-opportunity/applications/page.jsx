@@ -25,7 +25,7 @@ export default function FounderApplications() {
     const fetchFounderApplications = async () => {
       if (!session?.user?.email) return;
       try {
-        const res = await fetch(`http://localhost:5000/api/founder-applications?email=${session.user.email}`);
+        const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_SITE_URL}/api/founder-applications?email=${session.user.email}`);
         const data = await res.json();
         if (res.ok) {
           setApplications(data);
@@ -49,7 +49,7 @@ export default function FounderApplications() {
     setActionLoading((prev) => ({ ...prev, [id]: targetStatus }));
 
     try {
-      const res = await fetch(`http://localhost:5000/api/applications/status/${id}`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_SITE_URL}/api/applications/status/${id}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ status: targetStatus })
@@ -57,7 +57,7 @@ export default function FounderApplications() {
       const data = await res.json();
 
       if (res.ok) {
-        toast.success(`Application ${targetStatus.toLowerCase()} successfully! 🎉`);
+        toast.success(`Application ${targetStatus.toLowerCase()} successfully! `);
         
        
         setApplications((prevApps) =>

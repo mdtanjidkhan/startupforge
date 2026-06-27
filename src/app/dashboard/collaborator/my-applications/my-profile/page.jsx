@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { authClient } from "@/lib/auth-client";
-import { Card, Spinner, Button, Input,  Avatar, Chip, TextArea } from "@heroui/react";
+import { Card, Spinner, Button, Input,  Avatar, Chip, TextArea, TextField, Label } from "@heroui/react";
 import toast from "react-hot-toast";
 import { 
   HiOutlineUser, 
@@ -31,7 +31,7 @@ export default function CollaboratorProfile() {
     const fetchProfileData = async () => {
       if (!session?.user?.email) return;
       try {
-        const res = await fetch(`http://localhost:5000/api/collaborator-profile?email=${session.user.email}`);
+        const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_SITE_URL}/api/collaborator-profile?email=${session.user.email}`);
         const data = await res.json();
         
         if (res.ok && data) {
@@ -91,7 +91,7 @@ export default function CollaboratorProfile() {
     };
 
     try {
-      const res = await fetch("http://localhost:5000/api/collaborator-profile", {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_SITE_URL}/api/collaborator-profile`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(profilePayload)
@@ -127,8 +127,6 @@ export default function CollaboratorProfile() {
 
   return (
     <div className="max-w-5xl mx-auto space-y-6 px-4 py-8 mt-16 md:mt-24">
-      
-      
       <div className="space-y-1">
         <h1 className="text-2xl md:text-3xl font-black tracking-tight text-gray-900 dark:text-slate-100">
           My Profile
@@ -168,10 +166,10 @@ export default function CollaboratorProfile() {
             
             {/* Full Name */}
             <div className="space-y-1.5">
-              <label className="text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-slate-400 flex items-center gap-1.5">
+              <Label className="text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-slate-400 flex items-center gap-1.5">
                 <HiOutlineUser className="size-4 text-violet-500" />
                 Full Name
-              </label>
+              </Label>
               <Input
                 type="text"
                 name="name"
@@ -180,16 +178,16 @@ export default function CollaboratorProfile() {
                 radius="xl"
                 value={formData.name}
                 onChange={handleChange}
-                className="font-medium"
+                className="font-medium w-64"
               />
             </div>
 
             {/* Email Address */}
             <div className="space-y-1.5">
-              <label className="text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-slate-400 flex items-center gap-1.5">
+              <Label className="text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-slate-400 flex items-center gap-1.5">
                 <HiOutlineEnvelope className="size-4 text-violet-500" />
                 Email Address
-              </label>
+              </Label>
               <Input
                 type="email"
                 name="email"
@@ -197,17 +195,17 @@ export default function CollaboratorProfile() {
                 radius="xl"
                 value={formData.email}
                 isDisabled
-                className="font-medium opacity-75"
+                className="font-medium opacity-75 w-64"
               />
               <p className="text-[11px] text-gray-400 dark:text-slate-500 pl-1">Email is linked to your account security and cannot be changed.</p>
             </div>
 
             {/* Profile Image URL */}
             <div className="space-y-1.5">
-              <label className="text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-slate-400 flex items-center gap-1.5">
+              <Label className="text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-slate-400 flex items-center gap-1.5">
                 <HiOutlineLink className="size-4 text-violet-500" />
                 Profile Image URL
-              </label>
+              </Label>
               <Input
                 type="url"
                 name="image"
@@ -216,16 +214,16 @@ export default function CollaboratorProfile() {
                 radius="xl"
                 value={formData.image}
                 onChange={handleChange}
-                className="font-medium"
+                className="font-medium w-64"
               />
             </div>
 
             {/* Skills */}
             <div className="space-y-1.5">
-              <label className="text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-slate-400 flex items-center gap-1.5">
+              <Label className="text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-slate-400 flex items-center gap-1.5">
                 <HiOutlineCpuChip className="size-4 text-violet-500" />
                 Skills (comma-separated)
-              </label>
+              </Label>
               <Input
                 type="text"
                 name="skills"
@@ -234,7 +232,8 @@ export default function CollaboratorProfile() {
                 radius="xl"
                 value={formData.skills}
                 onChange={handleChange}
-                className="font-medium"
+                className="font-medium w-64"
+                aria-label="Name"
               />
              
               {liveSkills.length > 0 && (
@@ -256,24 +255,32 @@ export default function CollaboratorProfile() {
 
             {/* Bio */}
             <div className="space-y-1.5">
-              <label className="text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-slate-400 flex items-center gap-1.5">
-                <HiOutlineDocumentText className="size-4 text-violet-500" />
-                Bio
-              </label>
-              <TextArea
+              <TextField
                 name="bio"
-                placeholder="Write a short bio about your expertise and what roles you are looking for..."
-                variant="bordered"
-                radius="xl"
-                minRows={3}
+                 minRows={3}
                 maxRows={6}
                 value={formData.bio}
                 onChange={handleChange}
+                 validate={(value) => {
+              if (value.length < 10) {
+                return "Name must be at least 10 characters";
+              }
+              return null;
+            }}
+              >
+                      <Label className="text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-slate-400 flex items-center gap-1.5">
+                <HiOutlineDocumentText className="size-4 text-violet-500" />
+                Bio
+              </Label>
+               <TextArea
+                
+                placeholder="Write a short bio about your expertise and what roles you are looking for..."
+                variant="bordered"
+                radius="xl"
                 className="font-medium"
-                classNames={{
-                  input: "resize-y min-h-[120px]",
-                }}
               />
+              </TextField>
+            
             </div>
 
             {/* Save Button */}

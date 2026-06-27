@@ -28,7 +28,7 @@ export default function SelectRolePage() {
   const handleRoleSelection = async (selectedRole) => {
     setLoading(true);
     try {
-      const res = await fetch(`http://localhost:5000/api/user/update-role`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_SITE_URL}/api/user/update-role`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

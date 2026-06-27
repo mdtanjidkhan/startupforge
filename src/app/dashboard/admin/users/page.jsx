@@ -20,7 +20,7 @@ export default function ManageUsers() {
   const fetchUsers = async () => {
     setLoading(true);
     try {
-      const res = await fetch("http://localhost:5000/api/admin/users");
+      const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_SITE_URL}/api/admin/users`);
       const data = await res.json();
       if (data.success) {
         setUsers(data.users);
@@ -45,7 +45,7 @@ export default function ManageUsers() {
     const endpoint = isBlocked ? "unblock" : "block";
 
     try {
-      const res = await fetch(`http://localhost:5000/api/admin/users/${endpoint}`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_SITE_URL}/api/admin/users/${endpoint}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email })

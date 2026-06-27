@@ -17,7 +17,7 @@ export default function ManageTransactions() {
   const fetchTransactions = async () => {
     setLoading(true);
     try {
-      const res = await fetch("http://localhost:5000/api/admin/transactions");
+      const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_SITE_URL}/api/admin/transactions`);
       const data = await res.json();
       if (data.success) {
         setTransactions(data.transactions);

@@ -26,7 +26,7 @@ export default function ManageOpportunities() {
   const fetchOpportunities = async (email) => {
     if (!email) return;
     try {
-      const res = await fetch(`http://localhost:5000/api/my-opportunities?email=${email}`);
+      const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_SITE_URL}/api/my-opportunities?email=${email}`);
       const data = await res.json();
       
       if (Array.isArray(data)) {
@@ -54,7 +54,7 @@ export default function ManageOpportunities() {
   const handleDelete = async (e, id) => {
     e.stopPropagation(); 
     try {
-      const res = await fetch(`http://localhost:5000/api/opportunities/${id}`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_SITE_URL}/api/opportunities/${id}`, {
         method: "DELETE",
         headers: { 'content-type': 'application/json' },
       });
