@@ -27,13 +27,22 @@ export default function DashboardHomePage() {
     }
     const userRole = session?.user?.role;
      console.log("your role", userRole);
-    if (userRole === "admin") {
+    // if (userRole === "admin") {
+    //   router.push("/dashboard/admin/analytics");
+    // } else if (userRole === "founder") {
+    //   router.push("/dashboard/overview");
+    // } else (userRole === "collaborator") {
+    //   router.push("/dashboard/collaborator");
+    // } 
+
+   if (userRole === "admin") {
       router.push("/dashboard/admin/analytics");
     } else if (userRole === "founder") {
       router.push("/dashboard/overview");
-    } else (userRole === "collaborator") {
+    } else {
       router.push("/dashboard/collaborator");
-    } 
+
+    }
     
   }, [session, isPending, router]);
 
