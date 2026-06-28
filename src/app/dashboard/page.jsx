@@ -26,14 +26,16 @@ export default function DashboardHomePage() {
       return; 
     }
     const userRole = session?.user?.role;
-
     if (userRole === "admin") {
       router.push("/dashboard/admin/analytics");
     } else if (userRole === "founder") {
       router.push("/dashboard/overview");
-    } else {
+    } else if (userRole === "collaborator") {
       router.push("/dashboard/collaborator");
+    } else {
+      router.push("/select-role");
     }
+    
   }, [session, isPending, router]);
 
   return (
