@@ -27,10 +27,6 @@ export default function DashboardHomePage() {
     }
     const userRole = session?.user?.role;
      console.log("your role", userRole);
-    if (!userRole) {
-      router.push("/select-role"); 
-      return;
-    }
     if (userRole === "admin") {
       router.push("/dashboard/admin/analytics");
     } else if (userRole === "founder") {

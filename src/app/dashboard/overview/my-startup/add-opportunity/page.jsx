@@ -60,7 +60,7 @@ function AddOpportunityForm() {
   useEffect(() => {
     if (paymentSuccess && session?.user?.email) {
       toast.loading("Processing your premium membership...", { id: "payment" });
-      
+     
       fetch(`${process.env.NEXT_PUBLIC_SERVER_SITE_URL}/api/payments/success`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
