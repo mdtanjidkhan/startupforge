@@ -69,7 +69,8 @@ export default function RegisterPage() {
     }
   };
 
-  const handleSubmit = async (e) => {
+
+const handleSubmit = async (e) => {
     e.preventDefault();
     
     const passwordError = validatePassword(formData.password);
@@ -89,8 +90,7 @@ export default function RegisterPage() {
     try {
       const imageUrl = await uploadToImgBB(imageFile);
 
-      // Fixed: Passing role directly on the root level for Better Auth compatibility
-      const { data, error } = await authClient.signUp.email({
+      const signUpRes = await authClient.signUp.email({
         email: formData.email,
         password: formData.password,
         name: formData.name,
@@ -98,13 +98,28 @@ export default function RegisterPage() {
         role: formData.role,
         isBlocked: false     
       });
-    console.log("Better Auth Full Response Data:", data);
-      if (error) {
-        toast.error(error.message || "Registration failed.", { id: toastId });
-      } else {
-        toast.success("Registration successful!", { id: toastId });
-        router.push("/dashboard"); 
+
+      if (signUpRes.error) {
+        toast.error(signUpRes.error.message || "Registration failed.", { id: toastId });
+        setLoading(false);
+        return;
       }
+      toast.loading("Logging into your workspace...", { id: toastId });
+
+      const signInRes = await authClient.signIn.email({
+        email: formData.email,
+        password: formData.password,
+      });
+
+      if (signInRes.error) {
+        toast.error("Account created, but auto-login failed. Please go to Login page.", { id: toastId });
+        router.push("/login");
+      } else {
+        toast.success("Welcome to StartupForge!", { id: toastId });
+        await authClient.listSessions.refresh(); 
+        window.location.href = "/dashboard"; 
+      }
+
     } catch (err) {
       toast.error(err.message || "Something went wrong!", { id: toastId });
     } finally {
