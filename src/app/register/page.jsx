@@ -44,7 +44,7 @@ export default function RegisterPage() {
     try {
       await authClient.signIn.social({
         provider: "google",
-        callbackURL: "/dashboard",
+        callbackURL: "/select-role",
       });
     } catch (err) {
       toast.error("Google sign-in failed! Please try again.");

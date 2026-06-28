@@ -21,7 +21,7 @@ export default function SelectRolePage() {
   }
 
   if (session?.user?.role) {
-    router.push("/dashboard");
+    router.push("/select-role");
     return null;
   }
 
