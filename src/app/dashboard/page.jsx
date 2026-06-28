@@ -26,6 +26,11 @@ export default function DashboardHomePage() {
       return; 
     }
     const userRole = session?.user?.role;
+     
+    if (!userRole) {
+      router.push("/select-role"); 
+      return;
+    }
     if (userRole === "admin") {
       router.push("/dashboard/admin/analytics");
     } else if (userRole === "founder") {

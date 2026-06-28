@@ -49,7 +49,7 @@ export default function DashboardSidebar() {
     { name: "Overview", href: "/dashboard/collaborator", icon: HiOutlineSquares2X2 },
     { name: "My Applications", href: "/dashboard/collaborator/my-applications", icon: HiOutlineQueueList },
     { name: "My Profile", href: "/dashboard/collaborator/my-applications/my-profile", icon: HiOutlineUserCircle },
-    { name: "Track Status", href: "/dashboard/overview/my-applications/explore-projects/track-status", icon: HiOutlineBriefcase },
+    { name: "Track Status", href: "/dashboard/collaborator/my-applications/my-profile/track-status", icon: HiOutlineBriefcase },
   ];
 
   const adminItems = [
