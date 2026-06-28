@@ -31,11 +31,9 @@ export default function DashboardHomePage() {
       router.push("/dashboard/admin/analytics");
     } else if (userRole === "founder") {
       router.push("/dashboard/overview");
-    } else if (userRole === "collaborator") {
+    } else (userRole === "collaborator") {
       router.push("/dashboard/collaborator");
-    } else {
-      router.push("/select-role");
-    }
+    } 
     
   }, [session, isPending, router]);
 
