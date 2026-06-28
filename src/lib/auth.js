@@ -14,7 +14,7 @@ export const auth = betterAuth({
       role: {
         type: "string",
         required: true,
-        defaultValue: "collaborator"
+        defaultValue: "",
       },
       isBlocked: {
         type: "boolean",

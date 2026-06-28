@@ -26,7 +26,7 @@ export default function DashboardHomePage() {
       return; 
     }
     const userRole = session?.user?.role;
-     
+     console.log("your role", userRole);
     if (!userRole) {
       router.push("/select-role"); 
       return;

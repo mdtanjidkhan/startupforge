@@ -4,9 +4,9 @@ import { useState, useEffect } from "react";
 import { authClient } from "@/lib/auth-client";
 import { Card, Spinner, Button } from "@heroui/react";
 import toast from "react-hot-toast";
-import { 
-  HiOutlineClock, 
-  HiOutlineCheckCircle, 
+import {
+  HiOutlineClock,
+  HiOutlineCheckCircle,
   HiOutlineXCircle,
   HiOutlineArrowTopRightOnSquare,
   HiOutlineBriefcase,
@@ -22,11 +22,11 @@ export default function MyApplications() {
   useEffect(() => {
     const fetchMyApplications = async () => {
       if (!session?.user?.email) return;
-      
+
       try {
         const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_SITE_URL}/api/my-applications?email=${session.user.email}`);
         const data = await res.json();
-        
+
         if (res.ok) {
           setApplications(data);
         } else {
@@ -78,7 +78,7 @@ export default function MyApplications() {
 
   return (
     <div className="max-w-6xl mx-auto space-y-8 px-4 py-8 mt-10 md:mt-16 transition-colors duration-300">
-      
+
       <div className="space-y-1 text-center sm:text-left">
         <h1 className="text-2xl md:text-3xl font-black tracking-tight text-gray-900 dark:text-slate-100">
           My Applications
@@ -119,9 +119,9 @@ export default function MyApplications() {
                     </td>
                     <td className="py-4 px-6">
                       {item.portfolio_link ? (
-                        <a 
-                          href={item.portfolio_link} 
-                          target="_blank" 
+                        <a
+                          href={item.portfolio_link}
+                          target="_blank"
                           rel="noreferrer"
                           className="inline-flex items-center gap-1 font-bold text-indigo-600 dark:text-indigo-400 hover:underline text-xs"
                         >
@@ -143,8 +143,8 @@ export default function MyApplications() {
           {/* Responsive mobile Card Layout */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:hidden">
             {applications.map((item) => (
-              <Card 
-                key={item._id} 
+              <Card
+                key={item._id}
                 className="p-5 border border-gray-200 dark:border-slate-800/80 bg-white dark:bg-[#111827] rounded-2xl shadow-sm flex flex-col justify-between gap-4"
               >
                 <div className="space-y-3">
@@ -173,9 +173,9 @@ export default function MyApplications() {
                     <div className="space-y-0.5">
                       <span className="text-gray-400 dark:text-slate-500 block">Portfolio</span>
                       {item.portfolio_link ? (
-                        <a 
-                          href={item.portfolio_link} 
-                          target="_blank" 
+                        <a
+                          href={item.portfolio_link}
+                          target="_blank"
                           rel="noreferrer"
                           className="font-bold text-indigo-600 dark:text-indigo-400 hover:underline flex items-center gap-1"
                         >
@@ -186,7 +186,7 @@ export default function MyApplications() {
                       )}
                     </div>
                   </div>
-                </div> 
+                </div>
                 {item.motivation_message && (
                   <div className="bg-gray-50 dark:bg-[#1f2937]/40 p-2.5 rounded-xl border border-gray-100 dark:border-slate-800/30">
                     <span className="text-[10px] font-bold uppercase tracking-wider text-gray-400 block mb-0.5">Your Message:</span>

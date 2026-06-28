@@ -40,7 +40,7 @@ export default function SelectRolePage() {
       const data = await res.json();
 
       if (data.success) {
-        toast.success(`Registered as ${selectedRole}! 🚀`);
+        toast.success(`Registered as ${selectedRole}! `);
         window.location.href = "/dashboard"; 
       } else {
         toast.error(data.message || "Failed to update role");
