@@ -4,6 +4,8 @@
 import { useState, useEffect } from "react";
 import { Modal, Button } from "@heroui/react"; 
 import toast from "react-hot-toast";
+import { authClient } from "@/lib/auth-client";
+
 import { HiOutlinePaperAirplane } from "react-icons/hi2";
 
 export default function ApplyModal({ isOpen, onClose, opportunity, userEmail, userName, userRole }) {
@@ -57,6 +59,7 @@ export default function ApplyModal({ isOpen, onClose, opportunity, userEmail, us
       const data = await res.json();
 
       if (data.success) {
+        // alert("Application submitted successfully!");
         toast.success("Application submitted successfully!");
         onClose(); 
       } else {
@@ -82,7 +85,7 @@ export default function ApplyModal({ isOpen, onClose, opportunity, userEmail, us
         <Modal.Container placement="auto">
           <Modal.Dialog className="sm:max-w-md w-full max-h-[85vh] flex flex-col overflow-hidden bg-white dark:bg-[#111827] border border-gray-100 dark:border-slate-800 rounded-2xl shadow-xl">
             <Modal.CloseTrigger onClick={onClose} />
-            
+             
             <Modal.Header className="shrink-0 p-6 pb-4 border-b border-gray-50 dark:border-slate-800/50">
               <div className="size-10 rounded-xl bg-indigo-50 dark:bg-indigo-950 flex items-center justify-center text-indigo-600 dark:text-indigo-400 mb-3">
                 <HiOutlinePaperAirplane className="size-5 rotate-45" />
