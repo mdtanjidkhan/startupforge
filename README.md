@@ -92,5 +92,38 @@ Data is dynamically calculated from MongoDB using optimized queries.
 
 
 ---
+🚀 Getting Started
+1. Clone the repository
+git clone https://github.com/mdtanjidkhan/startupforge.git
+cd startupforge
+2. Install dependencies
+npm install
+3. Configure environment variables
 
-# 📂 Project Structure
+Create a .env.local file and add the required environment variables.
+
+MONGODB_URI=your_mongodb_uri,
+
+JWT_SECRET=your_jwt_secret,
+
+NEXT_PUBLIC_API_URL=your_api_url,
+
+Never commit your actual secrets or environment variables to GitHub.
+
+4. Run the development server
+npm run dev
+
+Open http://localhost:3000 in your browser.
+
+👨‍💻 Author
+
+Md. Tanjid Hasan
+
+Full-Stack JavaScript Developer
+
+GitHub: https://github.com/mdtanjidkhan
+
+Portfolio: https://tanjid-portfolio.netlify.app/
+
+⭐ If you like StartupForge, consider giving the repository a star!
+
