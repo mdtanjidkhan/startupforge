@@ -1,6 +1,6 @@
 import DashboardSidebar from '@/components/DashboardSidebar';
 import React from 'react';
-import { Toaster } from 'react-hot-toast';
+// import { Toaster } from 'react-hot-toast';
 import { auth } from "@/lib/auth"; 
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
@@ -24,7 +24,7 @@ import { redirect } from "next/navigation";
               {children}
 
             </div>
-            <Toaster position="top-center" reverseOrder={false} />
+            {/* <Toaster position="top-center" reverseOrder={false} /> */}
         </div>
     );
 };
