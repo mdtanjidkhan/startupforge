@@ -156,9 +156,12 @@ export default function DashboardSidebar({ children }) {
             <Drawer.Dialog>
               <Drawer.CloseTrigger />
               <Drawer.Header className="border-b border-gray-100 dark:border-gray-800 py-4">
+                <Link href={'/'}>
                 <Drawer.Heading className="text-lg font-black text-indigo-600 dark:text-indigo-400 tracking-wider">
                   StartupForge
                 </Drawer.Heading>
+                </Link>
+                
               </Drawer.Header>
               <Drawer.Body className="py-4">
                 {navLink}
