@@ -186,7 +186,11 @@ export default function ManageUsers() {
               filteredUsers.map((user) => (
                 <tr key={user.id} className="hover:bg-gray-50/40 dark:hover:bg-slate-800/20 transition-colors">
                   <td className="py-4 px-6 flex items-center gap-3">
-                    <Avatar src={user.image} name={user.name} radius="xl" size="sm" />
+                    {/* <Avatar src={user.image} name={user.name} radius="xl" size="sm" /> */}
+                    <Avatar className="h-10 w-10 rounded-full object-cover border border-indigo-500">
+                                      <Avatar.Image alt={user.name} src={user.image} />
+                                      <Avatar.Fallback>JD</Avatar.Fallback>
+                                    </Avatar>
                     <span className="font-bold text-gray-900 dark:text-white">{user.name}</span>
                   </td>
                   <td className="py-4 px-6 text-gray-500 dark:text-slate-400 font-mono text-xs">{user.email}</td>
